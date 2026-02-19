@@ -1,8 +1,5 @@
 
-
-
-
-
+from tqdm import tqdm
 from nuclear_shape import NuclearShape
 
 # ---------------------------------------------------------
@@ -15,20 +12,20 @@ print("Loaded matrix shape:", shape.matrix.shape)
 
 
 # ---------------------------------------------------------
-# 2. Run all analyses
+# 2. Run all analyses (with tqdm)
 # ---------------------------------------------------------
 
-print("\n=== Running ellipsoid fit ===")
-shape.ellipsoid_fit()
+print("\n=== Running Test ===")
 
-print("\n=== Running inner ellipsoid ===")
-shape.ellipsoid_inner()
+analysis_steps = [
+    ("Ellipsoid fit", shape.ellipsoid_fit),
+    ("Inner ellipsoid", shape.ellipsoid_inner),
+    ("Outer ellipsoid", shape.ellipsoid_outer),
+    ("PCA", shape.compute_pca),
+]
 
-print("\n=== Running outer ellipsoid ===")
-shape.ellipsoid_outer()
-
-print("\n=== Running PCA ===")
-shape.compute_pca()
+for label, func in tqdm(analysis_steps, desc="Analysis", unit="step"):
+    func()
 
 
 # ---------------------------------------------------------
@@ -43,34 +40,34 @@ shape.print_metrics()
 # 4. Test 2D plots
 # ---------------------------------------------------------
 
-print("\n=== Plotting sphericity ===")
-shape.plot("sphericity", show=True)
+print("\n=== Plotting 2D visualizations ===")
 
-print("\n=== Plotting PCA projection ===")
-shape.plot("pca", show=True)
+plot_steps = [
+    ("Sphericity", "sphericity"),
+    ("PCA projection", "pca"),
+    ("Point cloud", "point_cloud"),
+]
 
-print("\n=== Plotting point cloud ===")
-shape.plot("point_cloud", show=True)
+for label, key in tqdm(plot_steps, desc="2D Plots", unit="plot"):
+    shape.plot(key, show=True)
 
 
 # ---------------------------------------------------------
 # 5. Test 3D renders
 # ---------------------------------------------------------
 
-print("\n=== Rendering ellipsoid ===")
-shape.render("ellipsoid", show=True)
+print("\n=== Rendering 3D models ===")
 
-print("\n=== Rendering inner ellipsoid ===")
-shape.render("ellipsoid_inner", show=True)
+render_steps = [
+    "ellipsoid",
+    "ellipsoid_inner",
+    "ellipsoid_outer",
+    "pca",
+    "point_cloud",
+]
 
-print("\n=== Rendering outer ellipsoid ===")
-shape.render("ellipsoid_outer", show=True)
-
-print("\n=== Rendering PCA ellipsoid ===")
-shape.render("pca", show=True)
-
-print("\n=== Rendering point cloud ===")
-shape.render("point_cloud", show=True)
+for model in tqdm(render_steps, desc="3D Renders", unit="model"):
+    shape.render(model, show=True)
 
 
 # ---------------------------------------------------------
@@ -78,12 +75,8 @@ shape.render("point_cloud", show=True)
 # ---------------------------------------------------------
 
 print("\n=== Rendering ALL models and exporting OBJ ===")
-for model in ["ellipsoid", "ellipsoid_inner", "ellipsoid_outer", "pca", "point_cloud"]:
+
+for model in tqdm(render_steps, desc="Exporting", unit="model"):
     shape.render(model, show=False, save=True, path="test_output", export_obj=True)
 
 print("\n=== Test completed successfully ===")
-
-
-
-
-

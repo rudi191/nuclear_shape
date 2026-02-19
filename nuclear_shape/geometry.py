@@ -7,7 +7,6 @@ import cvxpy as cp
 
 
 
-
 class NuclearShape:
     def __init__(self, file):
         self.f = file 
