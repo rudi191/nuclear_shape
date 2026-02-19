@@ -1,16 +1,25 @@
 nuclear_shape
-Tools for analysing nuclear shape from 3D‑genome models generated from Hi‑C data.
-The package provides ellipsoid fitting, PCA‑based shape characterization, sphericity metrics, and 2D/3D visualization tools.
+
+Tools for analysing nuclear shape from 3D genome models generated from Hi-C data.
+
+The package provides:
+
+Ellipsoid fitting
+
+PCA-based shape characterization
+
+Sphericity metrics
+
+2D and 3D visualization tools
 
 Installation
-Local installation (development mode)
-bash
+🔧 Local Installation (Development Mode)
 pip install -e .
-Standard installation (after PyPI release)
-bash
+
+📦 Standard Installation (after PyPI release)
 pip install nuclear_shape
+
 Quick Start
-python
 from nuclear_shape import NuclearShape
 
 # Load a Chrom3D .cmm file
@@ -32,43 +41,58 @@ shape.plot("pca", show=True)
 # Render 3D models
 shape.render("ellipsoid", show=True)
 shape.render("point_cloud", show=True)
+
 Features
-Ellipsoid Fitting
+🧮 Ellipsoid Fitting
+
 Algebraic ellipsoid fit
 
-Maximum‑volume inscribed ellipsoid
+Maximum-volume inscribed ellipsoid
 
-Minimum‑volume enclosing ellipsoid
+Minimum-volume enclosing ellipsoid
 
-Principal Component Analysis
-PCA ellipsoid
+📊 Principal Component Analysis
 
-Orientation and anisotropy metrics
+PCA-based ellipsoid
 
-Shape Metrics
+Orientation metrics
+
+Anisotropy measures
+
+📐 Shape Metrics
+
 Wadell sphericity
 
 Volume and surface area estimates
 
-Axis ratios and elongation
+Axis ratios
 
-Visualization
-2D plots (sphericity, PCA projection)
+Elongation metrics
 
-3D rendering of:
+🎨 Visualization
+2D Plots
 
-point cloud
+Sphericity
 
-fitted ellipsoid
+PCA projections
 
-inner/outer ellipsoids
+3D Rendering
+
+Point cloud
+
+Fitted ellipsoid
+
+Inner/outer ellipsoids
 
 PCA ellipsoid
 
 Input Format
-The package expects Chrom3D .cmm files, an XML‑based format containing 3D coordinates of nuclear markers.
+
+The package expects Chrom3D .cmm files,
+an XML-based format containing 3D coordinates of nuclear markers.
 
 Output
+
 The analysis produces:
 
 Sphericity metrics
@@ -81,19 +105,22 @@ PCA axes and explained variance
 
 3D renderings
 
-Optional OBJ exports
+Optional .obj exports
 
 Example Data
+
 A small example .cmm file is included in:
 
-Code
 test/example_real_data_0.cmm
-You can run the full pipeline using:
 
-bash
+
+Run the full pipeline:
+
 python test/test.py
+
 Dependencies
-Core dependencies (automatically installed):
+
+Core dependencies (installed automatically):
 
 numpy
 
@@ -108,8 +135,10 @@ seaborn
 trimesh
 
 License
+
 MIT License
 Copyright (c) 2026
 
 Citation
-If you use this package in your research, please cite appropriately.
+
+If you use this package in your research, please cite it appropriately.
