@@ -1,6 +1,3 @@
-Copy–paste this directly into README.md:
-
-markdown
 # nuclear_shape
 
 A small Python library for analysing nuclear shape from 3D‑genome models (Chrom3D `.cmm` files).  
