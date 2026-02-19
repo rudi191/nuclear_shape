@@ -12,7 +12,7 @@ pip install nuclear_shape
 
 ## Basic Usage
 
-´´´python
+```python
 from nuclear_shape import NuclearShape
 
 shape = NuclearShape("path/to/file.cmm")
@@ -25,14 +25,15 @@ shape.compute_pca()
 shape.print_metrics()
 shape.plot("sphericity", show=True)
 shape.render("ellipsoid", show=True)
-´´´
+```
+
 ## Example Data
 An example .cmm file and a test script are included:
 
-´´´code
+```code
 test/example_real_data_0.cmm
 python test/test.py
-´´´
+```
 
 ## License
 MIT License
