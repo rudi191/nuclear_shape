@@ -7,7 +7,7 @@ from nuclear_shape import NuclearShape
 # ---------------------------------------------------------
 
 print("\n=== Loading .cmm file ===")
-shape = NuclearShape("test/example_real_data_0.cmm")
+shape = NuclearShape("example_real_data_0.cmm")
 print("Loaded matrix shape:", shape.matrix.shape)
 
 

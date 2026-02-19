@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+nuclear_shape/__init__.py
+nuclear_shape/geometry.py
+nuclear_shape/verify_installation.py
+nuclear_shape/visualize.py
+nuclear_shape.egg-info/PKG-INFO
+nuclear_shape.egg-info/SOURCES.txt
+nuclear_shape.egg-info/dependency_links.txt
+nuclear_shape.egg-info/entry_points.txt
+nuclear_shape.egg-info/requires.txt
+nuclear_shape.egg-info/top_level.txt
+test/test.py
