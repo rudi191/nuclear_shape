@@ -1,2 +1,0 @@
-[console_scripts]
-verify-installation = nuclear_shape.verify_installation:main
