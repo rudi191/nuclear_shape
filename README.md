@@ -5,9 +5,9 @@ Includes ellipsoid fitting, PCA, basic shape metrics, and simple plotting/render
 
 ## Installation
 
-```bash
-pip install -e .
-```bash
+
+pip install nulcear_shape
+
 
 Basic Usage
 
