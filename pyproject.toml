@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nuclear_shape"
+version = "0.1.0"
+description = "Python package for analysing nuclear shape from 3D-genome models generated from Hi-C data."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+
+authors = [
+  { name = "Rudi" }
+]
+
+dependencies = [
+    "numpy",
+    "scipy",
+    "scikit-learn",
+    "tqdm",
+    "pandas",
+    "seaborn",
+    "matplotlib",
+    "Jinja2",
+    "trimesh",
+    "cvxpy",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "black",
+    "flake8",
+]
+
+[project.scripts]
+verify-installation = "nuclear_shape.verify_installation:main"
+
+[tool.setuptools]
+packages = ["nuclear_shape"]
+
+[tool.setuptools.package-data]
+nuclear_shape = ["*.py"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
