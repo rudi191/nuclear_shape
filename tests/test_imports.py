@@ -23,7 +23,7 @@ def test_plotting_import():
     from nuclear_shape import plotting_results
     assert hasattr(plotting_results, 'sphericity_plot')
     assert hasattr(plotting_results, 'pca_plot')
-    assert hasattr(plotting_results, 'export_sphericity_table')
+    assert hasattr(plotting_results, 'render_model')
 
 
 def test_dependencies():

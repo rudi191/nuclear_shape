@@ -48,7 +48,6 @@ pytest tests/
 - **Principal Component Analysis**: PCA-based shape characterization
 - **Sphericity metrics**: Multiple sphericity calculations including Wadell sphericity
 - **Visualization**: Comprehensive plotting and 3D rendering capabilities
-- **Batch processing**: Process multiple files and generate statistics
 
 ## Usage
 
@@ -70,6 +69,26 @@ shape.principal_components()
 print(shape.results["ellipsoid"]["sphericity"])
 ```
 
+### Plotting / presenting results
+
+You can either call plotting helpers directly:
+
+```python
+from nuclear_shape import plotting_results as pr
+
+pr.sphericity_plot(shape, show=True)
+pr.pca_plot(shape, show=True)
+pr.render_model(shape, model="all", show=True)
+```
+
+…or use the convenience wrappers on the class (they delegate to `plotting_results`):
+
+```python
+shape.plot("sphericity", show=True)
+shape.plot("pca", show=True)
+shape.render(model="all", show=True)
+```
+
 ### Library usage (recommended)
 
 This project is intended to be used as a Python library (import and call the class + plotting helpers).
@@ -87,7 +106,6 @@ The analysis produces:
 - Aspect ratios and shape classification (oblate/prolate)
 - PCA-based anisotropy and elongation metrics
 - Visualizations (plots and 3D renderings)
-- Optional LaTeX tables for publication
 
 ## Dependencies
 

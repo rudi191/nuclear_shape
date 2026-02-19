@@ -2,21 +2,17 @@
 import numpy as np 
 import xml.etree.ElementTree as ET
 from scipy.spatial import ConvexHull
-from pathlib import Path
-import warnings
 from sklearn.decomposition import PCA
-from . import plotting_results 
 import cvxpy as cp 
 
-class nuclear_shape:
+
+
+
+class NuclearShape:
     def __init__(self, file):
         self.f = file 
         self.matrix, self.center = self.extract_and_center(file)
         self.results = {}
-
-
-        print("converted matrix:", self.matrix.shape) 
-        print(self.matrix)
 
     def extract_and_center(self, file):
         tree = ET.parse(file)
@@ -282,7 +278,7 @@ class nuclear_shape:
 
 
 
-    def principal_components(self):
+    def compute_pca(self):
         pca = PCA(n_components=3)
         pca.fit(self.matrix)
 
@@ -302,19 +298,63 @@ class nuclear_shape:
         }
 
 
+    def print_metrics(self):
+     
+    
+        if not self.results:
+            print("No results available. Run an analysis method first.")
+            return
+
+        for key, res in self.results.items():
+            if "sphericity" not in res:
+                continue
+
+            print(f'\n=== {key.upper()} ===')
+            for metric, value in res["sphericity"].items():
+                print(f'{metric}: {value:.4f}')
 
 
 
+    def print_metrics(self):
+        if not self.results:
+            print("No results available. Run an analysis method first.")
+            return
 
-    def plot(self, **kwargs): 
-#        from plotting_results import plot_all 
-        # plot_all(self, **kwargs)
-        pass 
+        for key, res in self.results.items():
+            if "sphericity" not in res:
+                continue
+
+            print(f"\n=== {key.upper()} ===")
+            for metric, value in res["sphericity"].items():
+                if isinstance(value, (int, float)):
+                    print(f"{metric}: {value:.4f}")
+                else:
+                    print(f"{metric}: {value}")
+
+    def plot(self, kind="sphericity", **kwargs):
+            """
+                Convenience wrapper for 2D visualizations.
+                """
+            from . import visualize as vz
+
+            kinds = {
+                    "sphericity": vz.plot_sphericity,
+                        "pca": vz.plot_pca,
+                        "point_cloud": vz.plot_point_cloud,
+                    }
+
+            if kind not in kinds:
+                    raise ValueError(f"Unknown plot kind: {kind}. Choose one of: {sorted(kinds)}")
+
+            return kinds[kind](self, **kwargs)
 
 
-
-
-
+    def render(self, model="all", **kwargs):
+            """
+                Convenience wrapper for 3D rendering.
+                """
+            from . import visualize as vz
+            return vz.render_model(self, model=model, **kwargs)
 
 
 
