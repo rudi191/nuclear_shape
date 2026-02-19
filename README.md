@@ -1,3 +1,6 @@
+Copy–paste this directly into README.md:
+
+markdown
 # nuclear_shape
 
 A small Python library for analysing nuclear shape from 3D‑genome models (Chrom3D `.cmm` files).  
@@ -5,13 +8,14 @@ Includes ellipsoid fitting, PCA, basic shape metrics, and simple plotting/render
 
 ## Installation
 
+```bash
+pip install nuclear_shape
+```
 
-pip install nulcear_shape
 
+## Basic Usage
 
-Basic Usage
-
-python
+´´´python
 from nuclear_shape import NuclearShape
 
 shape = NuclearShape("path/to/file.cmm")
@@ -24,17 +28,15 @@ shape.compute_pca()
 shape.print_metrics()
 shape.plot("sphericity", show=True)
 shape.render("ellipsoid", show=True)
-
-
-
-Example Data
+´´´
+## Example Data
 An example .cmm file and a test script are included:
 
-Code
-
+´´´code
 test/example_real_data_0.cmm
 python test/test.py
+´´´
 
-
-License
+## License
 MIT License
+
