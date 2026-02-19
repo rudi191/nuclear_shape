@@ -1,8 +1,9 @@
 nuclear_shape
 Tools for analysing nuclear shape from 3D‑genome models generated from Hi‑C data.
+The package provides ellipsoid fitting, PCA‑based shape characterization, sphericity metrics, and 2D/3D visualization tools.
 
 Installation
-Local installation (recommended during development)
+Local installation (development mode)
 bash
 pip install -e .
 Standard installation (after PyPI release)
@@ -33,16 +34,16 @@ shape.render("ellipsoid", show=True)
 shape.render("point_cloud", show=True)
 Features
 Ellipsoid Fitting
-Standard algebraic ellipsoid fit
+Algebraic ellipsoid fit
 
 Maximum‑volume inscribed ellipsoid
 
 Minimum‑volume enclosing ellipsoid
 
 Principal Component Analysis
-PCA‑based nuclear orientation
+PCA ellipsoid
 
-PCA ellipsoid visualization
+Orientation and anisotropy metrics
 
 Shape Metrics
 Wadell sphericity
@@ -65,7 +66,7 @@ inner/outer ellipsoids
 PCA ellipsoid
 
 Input Format
-The package expects Chrom3D .cmm files containing 3D coordinates of nuclear markers in XML format.
+The package expects Chrom3D .cmm files, an XML‑based format containing 3D coordinates of nuclear markers.
 
 Output
 The analysis produces:
