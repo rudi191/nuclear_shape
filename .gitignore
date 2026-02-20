@@ -3,3 +3,4 @@ __pycache__/
 
 .Rproj.user
 /test/test_output/
+nuclear_shape.egg-info/

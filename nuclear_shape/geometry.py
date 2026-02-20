@@ -297,22 +297,6 @@ class NuclearShape:
         }
 
 
-    def print_metrics(self):
-     
-    
-        if not self.results:
-            print("No results available. Run an analysis method first.")
-            return
-
-        for key, res in self.results.items():
-            if "sphericity" not in res:
-                continue
-
-            print(f'\n=== {key.upper()} ===')
-            for metric, value in res["sphericity"].items():
-                print(f'{metric}: {value:.4f}')
-
-
 
     def print_metrics(self):
         if not self.results:
@@ -320,15 +304,45 @@ class NuclearShape:
             return
 
         for key, res in self.results.items():
-            if "sphericity" not in res:
-                continue
-
             print(f"\n=== {key.upper()} ===")
-            for metric, value in res["sphericity"].items():
-                if isinstance(value, (int, float)):
-                    print(f"{metric}: {value:.4f}")
-                else:
-                    print(f"{metric}: {value}")
+
+            # --- Ellipsoid metrics (sphericity block only) ---
+            if "sphericity" in res:
+                sph = res["sphericity"]
+                for metric, value in sph.items():
+                    if isinstance(value, (int, float, np.floating)):
+                        print(f"{metric}: {value:.4f}")
+                    else:
+                        print(f"{metric}: {value}")
+                continue
+
+            # --- PCA metrics ---
+            if key.upper() == "PCA":
+                pca_metrics = [
+                    "variance_ratio",
+                    "axis_lengths",
+                    "anisotropy",
+                    "elongation"
+                ]
+
+                for metric in pca_metrics:
+                    value = res.get(metric, None)
+                    if value is None:
+                        continue
+
+                    if isinstance(value, np.ndarray):
+                        print(f"{metric}: {np.array2string(value, precision=4)}")
+                    elif isinstance(value, (int, float, np.floating)):
+                        print(f"{metric}: {value:.4f}")
+                    else:
+                        print(f"{metric}: {value}")
+
+                continue
+
+
+
+
+
 
     def plot(self, kind="sphericity", **kwargs):
             """
