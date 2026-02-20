@@ -1,6 +1,8 @@
 __pycache__/
 *.json
+
 dist/
 .Rproj.user
 /test/test_output/
 nuclear_shape.egg-info/
+.DS_Store
