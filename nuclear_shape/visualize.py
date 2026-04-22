@@ -129,15 +129,14 @@ def plot_point_cloud(shape_obj, save=False, show=True, path=None):
 # =========================================================
 # 3D RENDERING
 # =========================================================
-
-def render_model(shape_obj, model="ellipsoid", save=False, show=True, path=None, export_obj=True):
+def render_model(shape_obj, name=None, model="ellipsoid", save=False, show=True, path=None, export_obj=True):
     """
     Render a 3D model (ellipsoid, inner, outer, PCA, or point cloud).
     """
     fig = plt.figure(figsize=(7, 7))
     ax = fig.add_subplot(111, projection="3d")
-
     mesh = None
+    stem = f"{name}_{model}" if name is not None else model
 
     # -------------------------
     # Ellipsoid models
@@ -145,10 +144,8 @@ def render_model(shape_obj, model="ellipsoid", save=False, show=True, path=None,
     if model in ["ellipsoid", "ellipsoid_inner", "ellipsoid_outer"]:
         ell = shape_obj.results[model]
         mesh = _ellipsoid_mesh(ell["center"], ell["radii"], ell["rotation"])
-
         ax.plot_trisurf(mesh.vertices[:, 0], mesh.vertices[:, 1], mesh.vertices[:, 2],
                         triangles=mesh.faces, color="cornflowerblue", alpha=0.6)
-
     # -------------------------
     # PCA ellipsoid
     # -------------------------
@@ -157,24 +154,20 @@ def render_model(shape_obj, model="ellipsoid", save=False, show=True, path=None,
         center = np.mean(shape_obj.matrix, axis=0)
         radii = 3 * np.sqrt(pca["variance"])
         rotation = pca["components"].T
-
         mesh = _ellipsoid_mesh(center, radii, rotation)
-
         ax.plot_trisurf(mesh.vertices[:, 0], mesh.vertices[:, 1], mesh.vertices[:, 2],
                         triangles=mesh.faces, color="cornflowerblue", alpha=0.6)
-
     # -------------------------
     # Point cloud
     # -------------------------
     elif model == "point_cloud":
         pts = shape_obj.matrix
         ax.scatter(pts[:, 0], pts[:, 1], pts[:, 2], s=5, alpha=0.7, color="steelblue")
-
     else:
         raise ValueError(f"Unknown model: {model}")
 
     # Formatting
-    ax.set_title(f"3D Model: {model}")
+    ax.set_title(f"3D Model: {model}" if name is None else f"{name} — {model}")
     ax.set_box_aspect([1, 1, 1])
     ax.set_xlabel("x")
     ax.set_ylabel("y")
@@ -183,14 +176,12 @@ def render_model(shape_obj, model="ellipsoid", save=False, show=True, path=None,
     # Save figure
     if save and path is not None:
         Path(path).mkdir(parents=True, exist_ok=True)
-        plt.savefig(Path(path) / f"{model}.png", dpi=300, bbox_inches="tight")
-
+        plt.savefig(Path(path) / f"{stem}.png", dpi=300, bbox_inches="tight")
     # OBJ export
     if export_obj and mesh is not None and path is not None:
         Path(path).mkdir(parents=True, exist_ok=True)
-        mesh.export(Path(path) / f"{model}.obj")
+        mesh.export(Path(path) / f"{stem}.obj")
 
     if show:
         plt.show()
-
     plt.close()
