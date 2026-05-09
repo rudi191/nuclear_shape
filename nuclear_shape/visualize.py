@@ -7,9 +7,7 @@ import matplotlib.pyplot as plt
 import trimesh
 
 
-# =========================================================
 # Internal helper: build ellipsoid mesh
-# =========================================================
 
 def _ellipsoid_mesh(center, radii, rotation, nu=60, nv=40):
     """
@@ -40,9 +38,7 @@ def _ellipsoid_mesh(center, radii, rotation, nu=60, nv=40):
     return trimesh.Trimesh(vertices=verts, faces=faces, process=False)
 
 
-# =========================================================
 # 2D PLOTS
-# =========================================================
 
 def plot_sphericity(shape_obj, save=False, show=True, path=None):
     """
@@ -126,9 +122,7 @@ def plot_point_cloud(shape_obj, save=False, show=True, path=None):
     plt.close()
 
 
-# =========================================================
 # 3D RENDERING
-# =========================================================
 def render_model(shape_obj, name=None, model="ellipsoid", save=False, show=True, path=None, export_obj=True):
     """
     Render a 3D model (ellipsoid, inner, outer, PCA, or point cloud).
@@ -138,17 +132,13 @@ def render_model(shape_obj, name=None, model="ellipsoid", save=False, show=True,
     mesh = None
     stem = f"{name}_{model}" if name is not None else model
 
-    # -------------------------
     # Ellipsoid models
-    # -------------------------
     if model in ["ellipsoid", "ellipsoid_inner", "ellipsoid_outer"]:
         ell = shape_obj.results[model]
         mesh = _ellipsoid_mesh(ell["center"], ell["radii"], ell["rotation"])
         ax.plot_trisurf(mesh.vertices[:, 0], mesh.vertices[:, 1], mesh.vertices[:, 2],
                         triangles=mesh.faces, color="cornflowerblue", alpha=0.6)
-    # -------------------------
     # PCA ellipsoid
-    # -------------------------
     elif model == "pca":
         pca = shape_obj.results["PCA"]
         center = np.mean(shape_obj.matrix, axis=0)
@@ -157,9 +147,7 @@ def render_model(shape_obj, name=None, model="ellipsoid", save=False, show=True,
         mesh = _ellipsoid_mesh(center, radii, rotation)
         ax.plot_trisurf(mesh.vertices[:, 0], mesh.vertices[:, 1], mesh.vertices[:, 2],
                         triangles=mesh.faces, color="cornflowerblue", alpha=0.6)
-    # -------------------------
     # Point cloud
-    # -------------------------
     elif model == "point_cloud":
         pts = shape_obj.matrix
         ax.scatter(pts[:, 0], pts[:, 1], pts[:, 2], s=5, alpha=0.7, color="steelblue")

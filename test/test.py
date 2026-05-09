@@ -2,18 +2,14 @@
 from tqdm import tqdm
 from nuclear_shape import NuclearShape
 
-# ---------------------------------------------------------
 # 1. Load file and initialize object
-# ---------------------------------------------------------
 
 print("\n=== Loading .cmm file ===")
 shape = NuclearShape("example_real_data_0.cmm")
 print("Loaded matrix shape:", shape.matrix.shape)
 
 
-# ---------------------------------------------------------
 # 2. Run all analyses (with tqdm)
-# ---------------------------------------------------------
 
 print("\n=== Running Test ===")
 
@@ -28,17 +24,13 @@ for label, func in tqdm(analysis_steps, desc="Analysis", unit="step"):
     func()
 
 
-# ---------------------------------------------------------
 # 3. Print metrics
-# ---------------------------------------------------------
 
 print("\n=== Printing metrics ===")
 shape.print_metrics()
 
 
-# ---------------------------------------------------------
 # 4. Test 2D plots
-# ---------------------------------------------------------
 
 print("\n=== Plotting 2D visualizations ===")
 
@@ -52,9 +44,7 @@ for label, key in tqdm(plot_steps, desc="2D Plots", unit="plot"):
     shape.plot(key, show=True)
 
 
-# ---------------------------------------------------------
 # 5. Test 3D renders
-# ---------------------------------------------------------
 
 print("\n=== Rendering 3D models ===")
 
@@ -70,9 +60,7 @@ for model in tqdm(render_steps, desc="3D Renders", unit="model"):
     shape.render(model, show=True)
 
 
-# ---------------------------------------------------------
 # 6. Test rendering all models + OBJ export
-# ---------------------------------------------------------
 
 print("\n=== Rendering ALL models and exporting OBJ ===")
 
