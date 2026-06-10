@@ -82,12 +82,12 @@ Based on the semi-axes $a \geq b \geq c$ of the fitted ellispoid.
 
 ### PCA Metrics
  
-Computed from a standard PCA of the point cloud. See the [scikit-learn PCA documentation](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html)  Here $\lambda_i$ mark the explained variance ratios (summing to 1), ordered $\lambda_1 \geq \lambda_2 \geq \lambda_3$. Two metrics are calculated from these ratios.  
+Computed from a standard PCA of the point cloud. See the [scikit-learn PCA documentation](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html).  Here $\lambda_i$ mark the explained variance ratios (summing to 1), ordered $\lambda_1 \geq \lambda_2 \geq \lambda_3$. Two metrics are calculated from these ratios.  
  
 | Metric | Description |
 |---|---|
 | `anisotropy` | $\lambda_1 - \lambda_3$ — ranges 0–1; 0 = uniform |
-| `elongation` | $\lambda_1 / \lambda_3$ — ratio of the most variance to least variance in the point cloud. 1 = uniform; larger values indicate a more elongated or flattened shape. |
+| `elongation` | $\lambda_1 / \lambda_3$ — ratio of most variance and least variance in the point cloud. 1 = uniform, larger values indicate a more elongated or flattened shape. |
 
 ## Example Data
 An example .cmm file and a test script are included:
