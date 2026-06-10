@@ -1,6 +1,6 @@
 # nuclear_shape
 
-A small Python library for analysing nuclear shape from 3D‑genome models (Chrom3D `.cmm` files).  
+A small Python library for analyzing nuclear shapes from 3D‑genome models (Chrom3D `.cmm` files).  
 Includes ellipsoid fitting, PCA, basic shape metrics, and simple plotting/rendering.
 
 ## Installation
